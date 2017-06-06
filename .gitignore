@@ -1,10 +1,13 @@
+*.log
+
 data/*
 
 image/*
 
 result/*
 
-test.py
-test_load.py
-test_save.py
-test_visual.py
+test_py/*
+
+model_lm/*
+
+model_pv/*

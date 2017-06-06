@@ -32,9 +32,9 @@ def plot_selected_with_labels_and_colors(low_dim_embedings, labels, selected, co
         curr_color = colors[i]
         if curr_label in labels:
             j = np.where(labels==curr_label)[0][0]
-#             j = labels.index(curr_label)
             x,y = low_dim_embedings[j,:]
             plt.scatter(x,y,c=curr_color)
+#             plt.scatter(x,y)
             plt.annotate(curr_label,xy=(x,y),xytext=(5,2),textcoords='offset points',ha='right',va='bottom')    
     plt.savefig(filename)
 
@@ -69,12 +69,13 @@ plot_with_labels(low_dim_embs, labels, './image/text8.png')
 
 
 # labels = np.load('./result/words_top500.npy')
-labels = np.load('./result/words_top1k.npy') 
+labels = np.load('./result/words_top2k.npy') 
+# selected = np.load('./result/dm_keywords.npy')
 selected = np.load('./result/testword.npy')
 colors = np.load('./result/color.npy')
 
 ####################### Google word2vec #######################
-
+'''
 import gensim
 print('==\nloading word2vec model...')
 start_time = time.time()
@@ -90,11 +91,11 @@ for w in labels:
 
 w2v_low_embs =  tsne.fit_transform(w2v_embs)
 # plot_with_labels(w2v_low_embs, labels, './image/w2v_color_2.png')
-plot_selected_with_labels_and_colors(w2v_low_embs, labels, selected,colors,'./image/w2v_color_2.png')
-
+plot_selected_with_labels_and_colors(w2v_low_embs, labels, selected, colors,'./image/w2v_color_2k.png')
+'''
 
 ####################### Glove common crawler #######################
-'''
+
 def loadGloveModel(path):
     print("loading Glove model")
     start_time = time.time()
@@ -118,5 +119,5 @@ for w in labels:
         glove_embs.append([0]*300)
 
 glove_low_embs =  tsne.fit_transform(glove_embs)
-plot_with_labels(glove_low_embs, labels, './image/glove_color_2.png') # 189s, around 3 mins
-'''
+# plot_with_labels(glove_low_embs, labels, './image/glove_color_2.png') # 189s, around 3 mins
+plot_selected_with_labels_and_colors(glove_low_embs, labels, selected, colors,'./image/glove_color_2k.png')
