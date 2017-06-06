@@ -11,7 +11,9 @@ https://williambert.online/2012/05/relatively-quick-and-easy-gensim-example-code
 3. doc2vec on wikidata:
 https://markroxor.github.io/gensim/static/notebooks/doc2vec-wikipedia.html
 http://textminingonline.com/training-word2vec-model-on-english-wikipedia-by-gensim
-
+==
+4. Explains what I am confused about WikiCorpus, MmCorpus, TextCorpus and save a lot of time:
+https://groups.google.com/forum/#!topic/gensim/r-ugaIzv_Zc
 Y, June 2017
 '''
 
@@ -33,17 +35,18 @@ logger.info("Running %s" % ' '.join(sys.argv))
 
 # ======================= load data ======================= 
 
-# create word->word_id mapping, 3h
 logger.info('Starting loading data')
+# create word->word_id mapping, 3h, 12min if set dict={}
 wiki = WikiCorpus("./data/enwiki-20170520-pages-articles.xml.bz2") # see: https://dumps.wikimedia.org/enwiki/
-wiki.dictionary.save("./model_pv/wiki_dict.dict")
-# wiki = MmCorpus("./model_pv/wiki_corpus.mm")  # Revive a corpus
-# wiki_dict = Dictionary.load("./model_pv/wiki_dict.dict")  # Load a dictionary
+# wiki.dictionary.save("./model_pv/wiki_dict.dict")
+# MmCorpus.serialize("./model_pv/wiki_corpus.mm", wiki) # another 3h, useless for this prgram
 logger.info('Finished loading data')
 
-logger.info('Starting serializing data')
-MmCorpus.serialize("./model_pv/wiki_corpus.mm", wiki)
-logger.info('Finished serializing data')
+# wiki = MmCorpus("./model_pv/wiki_corpus.mm") 
+# print(list(wiki))
+# wiki_dict = Dictionary.load("./model_pv/wiki_dict.dict")  # Load a dictionary
+# w2i = wiki_dict.token2id
+# i2w = dict((v, k) for k, v in iteritems(w2i))
 
 # 1.5h
 logger.info('Starting saving text')

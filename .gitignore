@@ -1,3 +1,5 @@
+screenlog.*
+
 *.log
 
 data/*
